@@ -18,3 +18,13 @@ function regPic(fileToUpload) {
   const playerHand = document.querySelector(".pic");
   playerHand.src = fileToUpload;
 }
+
+///////////////////////////////////////
+
+function cPass(cPass) {
+  if (cPass === "") {
+    return "Current Password Needed";
+  } else {
+    return "aa";
+  }
+}
