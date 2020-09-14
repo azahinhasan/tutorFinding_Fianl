@@ -2,59 +2,9 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="css/style_Zahin.css">
     <style>
-        .error {
-            color: #FF0000;
-            font-size: 15px;
-        }
-
-        #date {
-            width: 27px;
-        }
-
-
-        #form {
-            display: block;
-            text-align: left;
-            display: block;
-
-            position: relative;
-            left: 35%;
-            top: 0;
-            font-size: 18px;
-
-
-        }
-
         .topnav a.login {
-            background-color: #008CBA;
-            color: white;
-        }
-
-        .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            width: 280px;
-            border-radius: 10%;
-        }
-
-
-        .button2 {
-            background-color: white;
-            color: black;
-            border: 2px solid #008CBA;
-        }
-
-        .button2:hover {
             background-color: #008CBA;
             color: white;
         }
@@ -139,7 +89,7 @@
 
     <?php include 'header1.html'; ?>
 
-    <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form id="formLogin" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <table>
             <tr>
                 <td>
@@ -160,7 +110,7 @@
                 </td>
                 <td>
                     <input type="text" name="Email" value=<?php echo $Email ?>>
-                    <span class="error">* <?php echo $errEmail; ?></span>
+                    <span class="errorLogin">* <?php echo $errEmail; ?></span>
                 </td>
 
             </tr>
@@ -171,7 +121,7 @@
                 </td>
                 <td>
                     <input type="password" id="myInput" name="Password" value=<?php echo $Password ?>>
-                    <span class="error">* <?php echo $errPassword; ?></span>
+                    <span class="errorLogin">* <?php echo $errPassword; ?></span>
                 </td>
             </tr>
             <br><br>
@@ -196,10 +146,10 @@
         </table>
         <br>
 
-        <span class="error"><?php echo $errMsg; ?></span>
+        <span class="errorLogin"><?php echo $errMsg; ?></span>
         <br>
         <br>
-        <button type="submit" class="button button2" name="submit" value="submit" class="submit">Login</button>
+        <button type="submit" class="buttonLogin button2Login" name="submit" value="submit" class="submit">Login</button>
     </form>
 
 </body>
