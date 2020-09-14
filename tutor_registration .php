@@ -3,46 +3,11 @@
 
 
 <head>
-
+    <link rel="stylesheet" href="css/style_Zahin.css">
     <style>
-        .error {
-            color: #FF0000;
-        }
-
-        #form {
-            display: block;
-            text-align: left;
-            position: relative;
-            left: 35%;
-            top: 0px;
-            width: 1000px;
-        }
-
         .topnav a.registration {
             background-color: #008CBA;
             color: white;
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        .pic {
-            border-radius: 20%;
-        }
-
-        button {
-            background-color: white;
-            color: black;
-            border: 2px solid #008CBA;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            width: 500px;
         }
     </style>
 
@@ -497,7 +462,7 @@
         </table>
         <br>
         <br>
-        <button type="submit" class="button button2" name="button" value="submit" class="button">Sign UP</button>
+        <button type="submit" class="buttonReg button2Reg" name="button" value="submit" class="button">Sign UP</button>
     </form>
 
 </body>
