@@ -6,8 +6,8 @@ require_once 'db_connect.php';
 function addTutor($data)       //Done
 {
     $conn = db_conn();
-    $selectQuery = "INSERT into tutorinfo (Name, Email,  Gender, ProfilePic, CV,tUsername)
-VALUES (:Name, :Email, :Gender,:ProfilePic,:CV,:tUsername)";
+    $selectQuery = "INSERT into tutorinfo (Name, Email,  Gender, ProfilePic,Phone,CV,tUsername)
+VALUES (:Name, :Email, :Gender,:ProfilePic,:Phone,:CV,:tUsername)";
     try {
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([
@@ -16,6 +16,7 @@ VALUES (:Name, :Email, :Gender,:ProfilePic,:CV,:tUsername)";
             ':Gender' => $data['Gender'],
             ':ProfilePic' => $data['ProfilePic'],
             ':CV' => $data['CV'],
+            ':Phone' => $data['Phone'],
             ':tUsername' => $data['tUsername']
         ]);
     } catch (PDOException $e) {

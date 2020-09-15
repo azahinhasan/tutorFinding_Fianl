@@ -7,6 +7,13 @@
 
 <?php include 'header1.html'; ?>
 
+<?php
+
+session_start();
+$_SESSION["ProPic"] = "img.png";
+$_SESSION["CVse"] = "none";
+?>
+
 <body>
     <br>
     <br>

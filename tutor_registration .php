@@ -9,6 +9,10 @@
             background-color: #008CBA;
             color: white;
         }
+
+        .error {
+            font-size: 14px;
+        }
     </style>
 
     <script src="js/script.js"></script>
@@ -18,6 +22,7 @@
     <?php
     require_once './model_z.php';
     include 'header1.html';
+    session_start();
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = $tUsername = "";
@@ -182,8 +187,14 @@
         }
         //Profile Pic--------------------------------------------------------------
 
-        $data['ProfilePic'] = basename($_FILES["fileToUpload"]["name"]);
 
+
+        if (basename($_FILES["fileToUpload"]["name"]) != null) {
+            $_SESSION["ProPic"] = basename($_FILES["fileToUpload"]["name"]);
+        }
+        $data['ProfilePic'] = $_SESSION["ProPic"];
+
+        // echo  $_SESSION["ProPic"];
         if ($data['ProfilePic'] != null) {
             $counter++;
         }
@@ -241,6 +252,11 @@
             }
         }
 
+        if ($_SESSION["ProPic"] == "img.png") {
+            $msg = "Profile Picture not Uploaded";
+        }
+
+
         //--------------------------OtherFile
 
         $errors = array();
@@ -260,10 +276,14 @@
         if ($file_size > 209715002) {
             $errors[] = 'File size must be excately 2 MB';
         }
-
+        if ($file_name != null) {
+            $_SESSION["CVse"] = $file_name;
+        }
         if (empty($errors) == true) {
             move_uploaded_file($file_tmp, "OtherFiles/" . $file_name);
-            $data['CV'] = $file_name;
+
+            $data['CV'] = $_SESSION["CVse"];
+
             if ($data['CV'] != null) {
                 $counter++;
             }
@@ -289,7 +309,7 @@
         //$data['ProfilePic'] = "a";
 
         echo $counter;
-        if ($counter > 0) {
+        if ($counter >= 11) {
             if (addTutor($data)) {
                 echo 'Successfully added!!';
                 // header("Location: workDone.php");
@@ -311,11 +331,11 @@
                     Profile Pic
                 </td>
                 <td>
-                    <img class="pic" src=" ProPic/<?php echo $upload ?>" height="100px">
+                    <img class="pic" src=" ProPic/<?php echo $_SESSION["ProPic"]; ?>" height="100px">
                     <br>
                     <input type="file" name="fileToUpload" />
                     <br>
-                    <?php echo $msg; ?></span>
+                    <span class="error"> <?php echo $msg; ?></span>
                     <br>
                 </td>
             </tr>
@@ -435,15 +455,15 @@
                         <option name="Kuril" <?php if ($Address == 'Uttara') { ?>selected="true" <?php }; ?>>Uttara</option>
                     </select>
                     <span class="error">* <?php echo $errInterestedLocation; ?></span>
-                    <br>
-                    <br>
                 </td>
             </tr>
             <tr>
                 <td>
+                    <br>
                     Salary (Range)
                 </td>
                 <td>
+                    <br>
                     <input type="number" id=" salaryInput" min="0" max="999999" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
                     <input type="number" id=" salaryInput" min="1" max="999999" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
                     <span class="error">* <?php echo $errSalary; ?></span>

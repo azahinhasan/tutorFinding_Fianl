@@ -329,6 +329,7 @@
 
 .error {
   color: #ff0000;
+  font-size: 14px;
 }
 
 /*Footer*/
@@ -451,3 +452,5 @@ body {
 #sign {
   color: #008cba;
 }
+
+/*Update Password*/
