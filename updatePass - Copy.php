@@ -72,18 +72,35 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
         //$cPass = '<script type="text/javascript">document.write(cPass(",$cPassword,"));</script>';
         $true = "t";
         $cP = $_POST["cPassword"];
-        $cPass = "<script type='text/javascript'>document.write(cPass('$cP'));</script>";
+        $rP = $_POST["rPassword"];
+        $nP = $_POST["nPassword"];
+        $cPass = "<script>document.write(cPass('$cP','$nP','$rP'));</script>";
 
 
-        $cPasswordErr =  $cPass;
+        //  $nPass = "<script type='text/javascript'>document.write(nPass('$nP'));</script>";
 
-        if ($cPasswordErr == $cPass) {
-            $couner++;
-            echo $couner;
-            $cPasswordErr = "DOne";
+        //$rPass = "<script type='text/javascript'>document.write(rPass('$rP'));</script>";
+
+
+        // $cPasswordErr =  $cPass;
+        //$nPasswordErr =  $nPass;
+        // echo $a = $cPass;
+        // echo gettype($cPass);
+
+        // $a = number_format($cPass);
+        // echo gettype($a);
+        $counter = 0;
+        /* $cPasswordErr =  $cPass;
+        $nPasswordErr =  $nPass;
+        $rPasswordErr =  $rPass;*/
+
+
+        if ($cPass) {
+            $counter = 3;
         }
 
-        echo $cPass;
+        //echo $cPass;
+        //echo "<script type='text/javascript'>document.write(v);</script>";
     }
 
 
@@ -122,6 +139,9 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
     ?>
     <?php include "headerTutorHome.html"; ?>
 
+    <script>
+        var v = 5;
+    </script>
 
     <dev class="main">
 

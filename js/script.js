@@ -20,11 +20,39 @@ function regPic(fileToUpload) {
 }
 
 ///////////////////////////////////////
+function cPass(cP, rP, nP) {
+  if (cP === "") {
+    alert("Current Password Needed");
+    //return 0;
+  }
+  if (rP === "") {
+    alert("Current Password Needed");
+    //return 0;
+  } else if (cP == rP) {
+    alert("New Password should not be same as the Current Password");
+  }
 
-function cPass(cPass) {
-  if (cPass === "") {
-    return "Current Password Needed";
+  if (nP === "") {
+    alert("Current Password Needed");
+    //return 0;
+  } else if (nP != rP) {
+    alert("New Password not match with the Retyped Password");
   } else {
-    return "aa";
+    return true;
+  }
+}
+
+function nPass(nPass) {
+  if (nPass === "") {
+    return "Need Password Needed";
+  } else {
+    return "*";
+  }
+}
+function rPass(cPass) {
+  if (cPass === "") {
+    return "Repeat Password Needed";
+  } else {
+    return "*";
   }
 }
