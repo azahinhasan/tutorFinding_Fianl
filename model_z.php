@@ -100,6 +100,47 @@ VALUES (:Name, :Email, :Gender,:ProfilePic,:Phone,:CV,:tUsername)";
     return true;
 }
 
+
+
+function addAdmin($data)       //Done
+{
+    $conn = db_conn();
+    $selectQuery = "INSERT into admininfo (Name, Email, Gender,Phone,Type)  VALUES (:Name, :Email, :Gender,:Phone,:Type)";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            ':Name' => $data['Name'],
+            ':Email' => $data['Email'],
+            ':Type' => $data['Type'],
+            ':Gender' => $data['Gender'],
+            ':Phone' => $data['Phone']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage() . "tutorinfo";
+    }
+
+    $conn2 = db_conn();
+    $selectQuery2 = "INSERT into login (Email,Username, Password,Type,Verify) VALUES (:Email, :tUsername, :Password, :Type, :Verify)";
+    try {
+        $stmt = $conn2->prepare($selectQuery2);
+        $stmt->execute([
+            ':Email' => $data['Email'],
+            ':Password' => $data['Password'],
+            ':Type' => $data['Type'],
+            ':Verify' => $data['Verify'],
+            ':tUsername' => $data['tUsername']
+
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    $conn = null;
+    $conn2 = null;
+    $conn3 = null;
+    return true;
+}
+
 function checkLogin($data)
 {
     $conn = db_conn();
@@ -180,6 +221,62 @@ function updatePass($data)
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([
             $data['Password'], $data['Email']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    $conn = null;
+    return true;
+}
+
+
+
+function showAll() //admin
+{
+    $conn = db_conn();
+    $selectQuery = 'SELECT * FROM admininfo';
+    try {
+        $stmt = $conn->query($selectQuery);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+}
+function deleteAdmin($Email)
+{
+    $conn = db_conn();
+    $selectQuery = "DELETE FROM admininfo WHERE Email = ?";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$Email]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $conn = null;
+    $conn = db_conn();
+    $selectQuery = "DELETE FROM login WHERE Email = ?";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([$Email]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $conn = null;
+
+
+    return true;
+}
+
+function updateStudent($id, $data)
+{
+    $conn = db_conn();
+    $selectQuery = "UPDATE user_info set Name = ?, Surname = ?, Username = ? where ID = ?";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $data['name'], $data['surname'], $data['username'], $id
         ]);
     } catch (PDOException $e) {
         echo $e->getMessage();

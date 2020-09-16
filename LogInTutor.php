@@ -76,6 +76,15 @@
             ///////////////////////////////////////////////////////////
 
             elseif ($_POST['Type'] == "admin") {
+                $_SESSION["type"] = "admin";
+                $_SESSION['Email'] = $Email;
+                // header("Location:tutorHome.php");
+                die;
+            } elseif ($_POST['Type'] == "moderator") {
+                $_SESSION["type"] = "moderator";
+                $_SESSION['Email'] = $Email;
+                // header("Location:tutorHome.php");
+                die;
             } elseif ($_POST['Type'] == "parent") {
                 $_SESSION["loggedin"] = "parent";
             }
@@ -98,6 +107,7 @@
                 <td>
                     <select name="Type" id="Type">
                         <option name="Admin">admin</option>
+                        <option name="Moderator">moderator</option>
                         <option name="Tutor">tutor</option>
                         <option name="Parent">parent</option>
                     </select>
