@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+<title>Sign Up Option</title>
 
 <head>
     <link rel="stylesheet" href="css/style_Zahin.css">

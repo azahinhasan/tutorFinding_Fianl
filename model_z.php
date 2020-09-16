@@ -269,14 +269,28 @@ function deleteAdmin($Email)
     return true;
 }
 
-function updateStudent($id, $data)
+function updateType($Email, $Type)
 {
+
     $conn = db_conn();
-    $selectQuery = "UPDATE user_info set Name = ?, Surname = ?, Username = ? where ID = ?";
+    $selectQuery = "UPDATE login set Type = ? where Email = ?";
     try {
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([
-            $data['name'], $data['surname'], $data['username'], $id
+            $Type, $Email
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    $conn = null;
+
+    $conn = db_conn();
+    $selectQuery = "UPDATE admininfo set Type = ? where Email = ?";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $Type, $Email
         ]);
     } catch (PDOException $e) {
         echo $e->getMessage();

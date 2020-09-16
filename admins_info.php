@@ -6,44 +6,61 @@ function fetchAllStudents()
 }
 
 
-$students = showAll();
+$admin = showAll();
 
 ?>
 <!DOCTYPE html>
 <html>
+<title>ALL Admins Info</title>
 
 <head>
+    <link rel="stylesheet" type="text/css" href="css/style_Zahin.css?version=1">
     <title></title>
 </head>
 
 <body>
+    <?php
+    require_once './model_z.php';
+    include 'header1.html';
+    session_start();
+    $_SESSION["typeF"] = "moderator";
+    ?>
 
-    <table>
+    <h2 class="hAdminsInfo">ALL Information of Admins and Moderator</h2>
+    <table class="tableAdminsInfo">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Gender</th>
-                <th>Rank</th>
-                <th>Action</th>
+            <tr id="trAdminsInfo trAdminsInfo2">
+                <th class="thAdminsInfo">Name</th>
+                <th class="thAdminsInfo">Email</th>
+                <th class="thAdminsInfo">Phone</th>
+                <th class="thAdminsInfo">Gender</th>
+                <th class="thAdminsInfo">Rank</th>
+                <th class="thAdminsInfo">Action</th>
+                <th class="thAdminsInfo">Change Rank</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($students as $i => $student) : ?>
-                <tr>
-                    <td><?php echo $student['ID'] ?></td>
-                    <td><?php echo $student['Name'] ?></td>
-                    <td><?php echo $student['Email'] ?></td>
-                    <td><?php echo $student['Phone'] ?></td>
-                    <td><?php echo $student['Gender'] ?></td>
-                    <td><?php echo $student['Type'] ?></td>
-                    <td><a href="removeAdmin.php?Email=<?php echo $student['Email'] ?>" onclick="return confirm('do you want to delete Y/N')">Delete</a></td>
-                    <td><a href="changeRank.php?Email=<?php echo $student['Type']  ?>" onclick="return confirm('do you want to change Y/N')">Change</a></td>
-                    </script>
 
-                </tr>
+            <?php foreach ($admin as $i => $admin) : ?>
+                <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                    <tr id="trAdminsInfo">
+                        <td class="tdAdminsInfo"><?php echo $admin['Name'] ?></td>
+                        <td class="tdAdminsInfo"><?php echo $admin['Email'] ?></td>
+                        <td class="tdAdminsInfo"><?php echo $admin['Phone'] ?></td>
+                        <td class="tdAdminsInfo"><?php echo $admin['Gender'] ?></td>
+                        <td class="tdAdminsInfo"><?php echo $admin['Type'] ?></td>
+                        <td class="tdAdminsInfo" id="tdAdminsInfo2"><a href="removeAdmin.php?Email=<?php echo $admin['Email'] ?>" onclick="return confirm('do you want to delete Y/N')">Delete</a></td>
+                        <td class="tdAdminsInfo"><a href="changeRank.php?Email=<?php echo $admin['Email'] ?>&Type=<?php echo $admin['Type'] ?>" onclick="return confirm('do you want to change Y/N')">
+                                <?php
+                                if ($admin['Type'] == "admin") {
+                                    echo "Demosion";
+                                } else {
+                                    echo "Promotion";
+                                }
+                                ?>
+                            </a></td>
+                    </tr>
+                </form>
             <?php endforeach; ?>
 
 

@@ -76,12 +76,12 @@
             ///////////////////////////////////////////////////////////
 
             elseif ($_POST['Type'] == "admin") {
-                $_SESSION["type"] = "admin";
+                $_SESSION["typeF"] = "admin";
                 $_SESSION['Email'] = $Email;
                 // header("Location:tutorHome.php");
                 die;
             } elseif ($_POST['Type'] == "moderator") {
-                $_SESSION["type"] = "moderator";
+                $_SESSION["typeF"] = "moderator";
                 $_SESSION['Email'] = $Email;
                 // header("Location:tutorHome.php");
                 die;

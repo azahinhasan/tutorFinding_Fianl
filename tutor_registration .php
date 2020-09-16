@@ -1,20 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 
+<title>Registration(TUTOR)</title>
 
 <head>
-    <link rel="stylesheet" href="css/style_Zahin.css">
-    <style>
-        .topnav a.registration {
-            background-color: #008CBA;
-            color: white;
-        }
-
-        .error {
-            font-size: 14px;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="css/style_Zahin.css?version=1">
     <script src="js/script.js"></script>
 </head>
 
@@ -25,7 +15,7 @@
     session_start();
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
-    $Class1to5 = $Class6to8 = $Class9to10 = $CV = $tUsername = "";
+    $Class1to5 = $Class6to8 = $Class9to10 = $CV = $tUsername = $msg2 = "";
     $Bangla = $English = $Chemistry = $Physics = $Math =  $Biology = $CV = $errUsername = "";
     $Verified = "false";
     $upload = "img.png";
@@ -289,7 +279,9 @@
             }
         } else {
         }
-
+        if ($_SESSION["CVse"] == "none") {
+            $msg2 = "CV not Uploaded";
+        }
 
 
         $data['Name'] = $_POST['Name'];
@@ -383,13 +375,12 @@
             </tr>
             <tr>
                 <td>
-                    Phone
+                    Phone(+88)
                     <br>
                     <br>
                 </td>
                 <td>
-                    +88
-                    <input type="text" name="Phone" value=<?php echo $Phone ?>>
+                    <input type="text" id="myInput" name="Phone" value=<?php echo $Phone ?>>
                     <span class="error">* <?php echo $errPhone; ?></span>
                     <br>
                     <br>
@@ -448,7 +439,7 @@
                     Interested Location
                 </td>
                 <td>
-                    <select name="InterestedLocation" id="InterestedLocation">
+                    <select name="InterestedLocation" id="myInput">
                         <option name="Option">Choose Option</option>
                         <option name="Mirpur" <?php if ($Address == 'Banani') { ?>selected="true" <?php }; ?>>Banani</option>
                         <option name="Mirpur" <?php if ($Address == 'Mirpur') { ?>selected="true" <?php }; ?>>Mirpur</option>
@@ -464,8 +455,8 @@
                 </td>
                 <td>
                     <br>
-                    <input type="number" id=" salaryInput" min="0" max="999999" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
-                    <input type="number" id=" salaryInput" min="1" max="999999" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
+                    <input type="number" id="salaryInput" min="0" max="999999" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
+                    <input type="number" id="salaryInput" min="1" max="999999" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
                     <span class="error">* <?php echo $errSalary; ?></span>
                     <br>
                     <br>
@@ -477,6 +468,7 @@
                 </td>
                 <td>
                     <input type="file" id="CV" name="CV">
+                    <span class="error"> <?php echo $msg2; ?></span>
                 </td>
             </tr>
         </table>
