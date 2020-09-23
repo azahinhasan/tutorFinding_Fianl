@@ -21,11 +21,10 @@ $admin = showAll();
 <body>
     <?php
     require_once './model_z.php';
-    include 'header1.html';
     session_start();
-    $_SESSION["typeF"] = "moderator";
+    $_SESSION["typeF"] = "admin"; //////////////////////////
     ?>
-
+    <?php include 'headerAdminHome.html'; ?>
     <h2 class="hAdminsInfo">ALL Information of Admins and Moderator</h2>
     <table class="tableAdminsInfo">
         <thead>
@@ -50,7 +49,7 @@ $admin = showAll();
                         <td class="tdAdminsInfo"><?php echo $admin['Gender'] ?></td>
                         <td class="tdAdminsInfo"><?php echo $admin['Type'] ?></td>
                         <td class="tdAdminsInfo" id="tdAdminsInfo2"><a href="removeAdmin.php?Email=<?php echo $admin['Email'] ?>" onclick="return confirm('do you want to delete Y/N')">Delete</a></td>
-                        <td class="tdAdminsInfo"><a href="changeRank.php?Email=<?php echo $admin['Email'] ?>&Type=<?php echo $admin['Type'] ?>" onclick="return confirm('do you want to change Y/N')">
+                        <td class="tdAdminsInfo"><a href="changeRank.php?Email=<?php echo $admin['Email'] ?>&Type=<?php echo $admin['Type'] ?>&Name=<?php echo $admin['Name'] ?>" onclick="return confirm('do you want to change Y/N')">
                                 <?php
                                 if ($admin['Type'] == "admin") {
                                     echo "Demosion";

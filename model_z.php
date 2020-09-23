@@ -299,3 +299,36 @@ function updateType($Email, $Type)
     $conn = null;
     return true;
 }
+
+
+function insertHistory($data)       //Done
+{
+    $conn = db_conn();
+    $selectQuery = "INSERT into rangchnagehistory (Updater, Time,  Name, Status)
+VALUES (:Updater, :Time, :Name,:Status)";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            ':Updater' => $data['Updater'],
+            ':Time' => $data['Time'],
+            ':Name' => $data['Name'],
+            ':Status' => $data['Status']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+
+function showAllHistory() //admin
+{
+    $conn = db_conn();
+    $selectQuery = 'SELECT * FROM rangchnagehistory';
+    try {
+        $stmt = $conn->query($selectQuery);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+}

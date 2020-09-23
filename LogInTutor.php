@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+<title>Login</title>
 
 <head>
     <link rel="stylesheet" href="css/style_Zahin.css">
@@ -76,11 +77,13 @@
             ///////////////////////////////////////////////////////////
 
             elseif ($_POST['Type'] == "admin") {
+                $_SESSION["loggedin"] = "admin";
                 $_SESSION["typeF"] = "admin";
                 $_SESSION['Email'] = $Email;
                 // header("Location:tutorHome.php");
                 die;
             } elseif ($_POST['Type'] == "moderator") {
+                $_SESSION["loggedin"] = "admin";
                 $_SESSION["typeF"] = "moderator";
                 $_SESSION['Email'] = $Email;
                 // header("Location:tutorHome.php");
