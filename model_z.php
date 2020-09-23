@@ -40,10 +40,11 @@ VALUES (:Name, :Email, :Gender,:ProfilePic,:Phone,:CV,:tUsername)";
     }
 
     $conn3 = db_conn();
-    $selectQuery3 = "INSERT into subject (tUsername,Subject) VALUES (:tUsername,:Subject)";
+    $selectQuery3 = "INSERT into subject (Email,tUsername,Subject) VALUES (:Email,:tUsername,:Subject)";
     try {
         $stmt = $conn3->prepare($selectQuery3);
         $stmt->execute([
+            ':Email' => $data['Email'],
             ':Subject' => $data['Subject'],
             ':tUsername' => $data['tUsername']
         ]);
@@ -52,10 +53,11 @@ VALUES (:Name, :Email, :Gender,:ProfilePic,:Phone,:CV,:tUsername)";
     }
     $conn3 = null;
     $conn3 = db_conn();
-    $selectQuery3 = "INSERT into salary (Username,Salary) VALUES (:tUsername, :Salary)";
+    $selectQuery3 = "INSERT into salary (Email,Username,Salary) VALUES (:Email, :tUsername, :Salary)";
     try {
         $stmt = $conn3->prepare($selectQuery3);
         $stmt->execute([
+            ':Email' => $data['Email'],
             ':Salary' => $data['Salary'],
             ':tUsername' => $data['tUsername']
         ]);
@@ -68,10 +70,11 @@ VALUES (:Name, :Email, :Gender,:ProfilePic,:Phone,:CV,:tUsername)";
 
     $conn3 = null;
     $conn3 = db_conn();
-    $selectQuery3 = "INSERT into location (tUsername,Location) VALUES (:tUsername, :Location)";
+    $selectQuery3 = "INSERT into location (Email,tUsername,Location) VALUES (:Email,:tUsername, :Location)";
     try {
         $stmt = $conn3->prepare($selectQuery3);
         $stmt->execute([
+            ':Email' => $data['Email'],
             ':Location' => $data['Location'],
             ':tUsername' => $data['tUsername']
         ]);
@@ -81,18 +84,17 @@ VALUES (:Name, :Email, :Gender,:ProfilePic,:Phone,:CV,:tUsername)";
 
     $conn3 = null;
     $conn3 = db_conn();
-    $selectQuery3 = "INSERT into classlevel (tUsername,Level) VALUES (:tUsername, :Level)";
+    $selectQuery3 = "INSERT into classlevel (Email,tUsername,Level) VALUES (:Email,:tUsername,:Level)";
     try {
         $stmt = $conn3->prepare($selectQuery3);
         $stmt->execute([
+            ':Email' => $data['Email'],
             ':Level' => $data['Level'],
             ':tUsername' => $data['tUsername']
         ]);
     } catch (PDOException $e) {
         echo $e->getMessage() . " Class ";
     }
-
-
 
     $conn = null;
     $conn2 = null;
