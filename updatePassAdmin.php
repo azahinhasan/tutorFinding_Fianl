@@ -76,7 +76,7 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
             $nPassword = $_POST["nPassword"];
             $rPassword = $_POST["rPassword"];
         } else {
-            $counter = 1;
+            $counter = 3;
             $cPassword = $_POST["cPassword"];
             $nPassword = $_POST["rPassword"];
             $rPassword = $_POST["nPassword"];
@@ -138,7 +138,7 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
         return $data;
     }
     ?>
-    <?php include "headerTutorHome.html"; ?>
+    <?php include 'headerAdmin.html'; ?>
 
     <script>
         var v = 5;

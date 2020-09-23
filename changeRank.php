@@ -3,9 +3,9 @@
 require_once 'model_z.php';
 session_start();
 
-$_SESSION["emailForUpdatePass"] = "A"; ////////////////////////
+//$_SESSION["emailForUpdatePass"] = "A"; ////////////////////////
 
-
+//echo $_SESSION["emailForUpdatePass"];
 
 $data['Updater'] =  $_SESSION["emailForUpdatePass"];
 $data['Time'] = date("Y/m/d") . " : " . date("h:i:sa");
@@ -26,17 +26,15 @@ if ($_SESSION["typeF"] == "moderator") {
         $_SESSION["Type"] = "moderator";
         $data['Status'] = "demotion";
         if (updateType($_GET['Email'], $_SESSION["Type"])) {
-            if (insertHistory($data)) {
-                header('Location:admins_info.php');
-            }
+            insertHistory($data);
+            header('Location:admins_info.php');
         }
     } else {
         $_SESSION["Type"] = "admin";
         $data['Status'] = "promotion";
         if (updateType($_GET['Email'], $_SESSION["Type"])) {
-            if (insertHistory($data)) {
-                header('Location:admins_info.php');
-            }
+            insertHistory($data);
+            header('Location:admins_info.php');
         }
     }
 }

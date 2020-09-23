@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+
+//$_SESSION["loggedin"] !== "tutor";
+
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== "admin") {
+    header("location: LoginTutor.php");
+    exit;
+}
+?>
+
+
+<?php
 require_once 'model_z.php';
 function fetchAllStudents()
 {
@@ -21,10 +34,9 @@ $admin = showAll();
 <body>
     <?php
     require_once './model_z.php';
-    session_start();
     $_SESSION["typeF"] = "admin"; //////////////////////////
     ?>
-    <?php include 'headerAdminHome.html'; ?>
+    <?php include 'headerAdmin.html'; ?>
     <h2 class="hAdminsInfo">ALL Information of Admins and Moderator</h2>
     <table class="tableAdminsInfo">
         <thead>

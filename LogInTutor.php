@@ -4,12 +4,6 @@
 
 <head>
     <link rel="stylesheet" href="css/style_Zahin.css">
-    <style>
-        .topnav a.login {
-            background-color: #008CBA;
-            color: white;
-        }
-    </style>
 </head>
 
 <body>
@@ -23,22 +17,27 @@
     $Bangla = $English = $Chemistry = $Physics = $Math =  $Biology =  $errMsg = "";
     $Verified = "false";
     $counter = 0;
-
+    //  echo $_COOKIE[$cookie_type];
     // $_SESSION["loggedin"] === "tutor";
 
-    if (isset($_SESSION["loggedin"])) {
-        if ($_SESSION["loggedin"] === "tutor") {
-            header("location: tutorHome.php");
-            exit;
-        } else if ($_SESSION["loggedin"] === "admin") {
-            header("location: tutorHome.php");
-            exit;
-        } else if ($_SESSION["loggedin"] === "parent") {
-            header("location: tutorHome.php");
-            exit;
-        }
+    /* if ($_COOKIE[$cookie_type] == "admin") {
+        $_SESSION["loggedin"] = "tutor";
+        header("location: RankHistory.php");
+        echo $_COOKIE[$cookie_type] . "aaaaaa";
+        //exit;
     }
 
+    /* if ($_SESSION["loggedin"] === "tutor") {
+        header("location: tutorHome.php");
+        exit;
+    } else if ($_SESSION["loggedin"] === "admin") {
+        header("location: RankHistory.php");
+        exit;
+    } else if ($_SESSION["loggedin"] === "parent") {
+        //header("location: tutorHome.php");
+        exit;
+    }*/
+    //echo $_SESSION["loggedin"];
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (empty($_POST["Password"])) {
@@ -80,7 +79,13 @@
                 $_SESSION["loggedin"] = "admin";
                 $_SESSION["typeF"] = "admin";
                 $_SESSION['Email'] = $Email;
-                // header("Location:tutorHome.php");
+
+                $cookie_email = $_SESSION["emailForUpdatePass"];
+                $cookie_pass =  $_SESSION["passForUpdatePass"];
+                $cookie_type = "admin";
+                setcookie($cookie_email, $cookie_pass, $cookie_type, time() + (86400 * 30), "/");
+                //echo $cookie_type;
+                header("Location:RankHistory.php");
                 die;
             } elseif ($_POST['Type'] == "moderator") {
                 $_SESSION["loggedin"] = "admin";

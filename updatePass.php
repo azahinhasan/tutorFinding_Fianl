@@ -4,26 +4,11 @@
 <head>
     <script src="js/script.js"></script>
     <script src="js/script.js" type="text/javascript?newversion"></script>
+    <link rel="stylesheet" href="css/style_Zahin.css">
     <style>
-        .error {
-            color: #FF0000;
-        }
-
-        #date {
-            width: 27px;
-        }
-
-        #form {
-            display: block;
-            text-align: left;
-            display: block;
-
-            position: relative;
-            left: 35%;
-            top: 0;
-            font-size: 18px;
-
-
+        .errorUpdatePass {
+            color: #ff0000;
+            font-size: 40px;
         }
     </style>
 </head>
@@ -35,15 +20,12 @@
     //require_once './LoginTutor.php';
     session_start();
     $cPassword = $nPassword = $rPassword =  $cPasswordErr = $nPasswordErr = $rPasswordErr = "";
-    $couner = 0;
+    $counter = 0;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["cPassword"])) {
-            $cPasswordErr = "cPassword is required";
-        } else {
-            $cPassword = $_POST["cPassword"];
-            $couner++;
-        }
-        if (empty($_POST["nPassword"])) {
+
+
+
+        /*if (empty($_POST["nPassword"])) {
             $nPasswordErr = "nPassword is required";
         } else {
             if ($_POST["cPassword"] == $_POST["nPassword"]) {
@@ -62,7 +44,9 @@
                 $rPassword = $_POST["rPassword"];
                 $couner++;
             }
-        }
+        }*/
+
+
 
 
         /*$lng = 103.72;
@@ -70,17 +54,59 @@ $lat = 1.34628;
 
 echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"));</script>"; */
 
-        $v = '<script type="text/javascript">document.write(validateForm());</script>';
+        //$cPass = '<script type="text/javascript">document.write(cPass(",$cPassword,"));</script>';
 
-        echo $v;
-        $rPasswordErr = $v;
-        if ($v == true) {
-            $rPasswordErr = " is required";
+        $true = "t";
+        $cP = $_POST["cPassword"];
+        $rP = $_POST["rPassword"];
+        $nP = $_POST["nPassword"];
+
+
+        if (empty($_POST["nPassword"]) || empty($_POST["rPassword"]) || empty($_POST["cPassword"]) || $_POST["nPassword"] == $_POST["cPassword"] || $_POST["rPassword"] !=  $_POST["nPassword"]) {
+            $cP = $_POST["cPassword"];
+            $rP = $_POST["rPassword"];
+            $nP = $_POST["nPassword"];
+            $cPass = "<script>document.write(cPass('$cP'));</script>";
+            $nPass = "<script>document.write(nPass('$cP','$nP'));</script>";
+            $rPass = "<script>document.write(rPass('$nP','$rP'));</script>";
+            $cPasswordErr =  $cPass;
+            $nPasswordErr =  $nPass;
+            $rPasswordErr =  $rPass;
+            $cPassword = $_POST["cPassword"];
+            $nPassword = $_POST["nPassword"];
+            $rPassword = $_POST["rPassword"];
+        } else {
+            $counter = 3;
+            $cPassword = $_POST["cPassword"];
+            $nPassword = $_POST["rPassword"];
+            $rPassword = $_POST["nPassword"];
         }
+
+
+
+        //  $nPass = "<script type='text/javascript'>document.write(nPass('$nP'));</script>";
+
+        //$rPass = "<script type='text/javascript'>document.write(rPass('$rP'));</script>";
+
+
+        // $cPasswordErr =  $cPass;
+        //$nPasswordErr =  $nPass;
+        // echo $a = $cPass;
+        // echo gettype($cPass);
+
+        // $a = number_format($cPass);
+        // echo gettype($a);
+
+        /* $cPasswordErr =  $cPass;
+        $nPasswordErr =  $nPass;
+        $rPasswordErr =  $rPass;*/
+        //echo $cPass;
+        //echo "<script type='text/javascript'>document.write(v);</script>";
     }
 
 
-    if ($couner == 3) {
+
+    if ($counter == 3) {
         $data1['Password'] = $_POST["nPassword"];
         $cPasswordErr = "Wrong Password";
         if ($_SESSION["passForUpdatePass"] == $_POST["cPassword"]) {
@@ -114,6 +140,9 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
     ?>
     <?php include "headerTutorHome.html"; ?>
 
+    <script>
+        var v = 5;
+    </script>
 
     <dev class="main">
 
@@ -125,7 +154,7 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
                     </td>
                     <td>
                         <input type="password" name="cPassword" value=<?php echo $cPassword ?>>
-                        <span class="error">* <?php echo $cPasswordErr; ?></span>
+                        <span class="errorUpdatePass">* <?php echo $cPasswordErr; ?></span>
                     </td>
                 </tr>
                 <br><br>
@@ -135,7 +164,7 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
                     </td>
                     <td>
                         <input type="password" name="nPassword" value=<?php echo $nPassword ?>>
-                        <span class="error">* <?php echo $nPasswordErr; ?></span>
+                        <span class="errorUpdatePass">* <?php echo $nPasswordErr; ?></span>
                     </td>
                 </tr>
                 <br><br>
@@ -145,7 +174,7 @@ echo "<script type='text/javascript'>document.write(GetAddress(",$lat,",",$lng,"
                     </td>
                     <td>
                         <input type="password" name="rPassword" value=<?php echo $rPassword ?>>
-                        <span class="error">* <?php echo $rPasswordErr; ?></span>
+                        <span class="errorUpdatePass">* <?php echo $rPasswordErr; ?></span>
                     </td>
                 </tr>
                 <br><br>

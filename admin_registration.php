@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+
+//$_SESSION["loggedin"] !== "tutor";
+
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== "admin") {
+    header("location: LoginTutor.php");
+    exit;
+}
+?>
+
+
 <!DOCTYPE HTML>
 <html>
 
@@ -25,8 +38,7 @@
 <body>
     <?php
     require_once './model_z.php';
-    include 'header1.html';
-    session_start();
+    include 'headerAdmin.html';
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = $tUsername = $Type = "";

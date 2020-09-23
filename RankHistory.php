@@ -1,11 +1,33 @@
 <?php
+
+
+
+
+/*if ($_COOKIE[$cookie_type] != "admin") {
+    header("location: LoginTutor.php");
+    echo $_COOKIE[$cookie_type] . "aaaaaa";
+    //exit;
+}*/
+session_start();
+
+//$_SESSION["loggedin"] !== "tutor";
+
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== "admin") {
+    header("location: LoginTutor.php");
+    exit;
+}
+?>
+
+
+
+<?php
 require_once 'model_z.php';
 function fetchAllStudents()
 {
     return showAllHistory();
 }
 
-
+//echo $_SESSION["loggedin"];
 $admin = showAllHistory();
 
 ?>
@@ -21,9 +43,8 @@ $admin = showAllHistory();
 <body>
     <?php
     require_once './model_z.php';
-    session_start();
     ?>
-    <?php include 'headerAdminHome.html'; ?>
+    <?php include 'headerAdmin.html'; ?>
     <h2 class="hAdminsInfo">ALL Rank History </h2>
     <table class="tableAdminsInfo">
         <thead>
